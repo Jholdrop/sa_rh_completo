@@ -2,31 +2,38 @@
   "vagas": [
     {
       "id": "1",
-      "nome": "Desenvolver FrontEnd Jr",
+      "nome": "Dev front",
       "foto": "foto1.jpg",
-      "descricao": "Trabalhar com HTML, CSS e JS",
-      "salario": 5000
+      "descricao": "Trampar com visual",
+      "salario": "6000"
     },
     {
       "id": "2",
       "nome": "Desenvolver BackEnd Pleno",
-      "foto": "foto2.jpg",
+      "foto": "https://via.placeholder.com/300x200?text=Backend+Pleno",
       "descricao": "Trabalhar com Desenvolvimento Web",
       "salario": 9000
     },
     {
       "id": "3",
       "nome": "Desenvolver Fullstack Senior",
-      "foto": "foto3.jpg",
+      "foto": "https://via.placeholder.com/300x200?text=Fullstack+Senior",
       "descricao": "Trabalhar com Desenvolvimento Web",
       "salario": 15000
     },
     {
+      "id": "4",
       "nome": "Analista de dados",
-      "foto": "foto4.jpg",
+      "foto": "https://via.placeholder.com/300x200?text=Analista+Dados",
       "descricao": "Trabalhar com dados",
-      "salario": 10000,
-      "id": "oYjERaDQDB4"
+      "salario": 10000
+    },
+    {
+      "id": "bIKCrKI4KgI",
+      "nome": "Trampar com back",
+      "foto": "foto1.jpg",
+      "descricao": "Trampar com o back end",
+      "salario": "2000"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

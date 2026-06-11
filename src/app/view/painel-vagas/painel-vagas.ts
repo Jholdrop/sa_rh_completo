@@ -1,56 +1,79 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Vaga } from '../../model/vaga.model';
+
+import { FormsModule } from '@angular/forms';
 import { Api } from '../../service/api';
 
 @Component({
   selector: 'app-painel-vagas',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './painel-vagas.html',
   styleUrl: './painel-vagas.scss',
 })
-export class PainelVagas {
+export class PainelVagas implements OnInit {
   //terminar de fazer o crud
+  public vagas: Vaga[] = []; // carregar as info da API
+  //Objeto para Interpolação do Formulário
+  public vaga: Vaga = new Vaga(0, '', '', '', 0);
 
-  public vaga: Vaga = new Vaga(0, '', '', '', 0) // interpolação de dados do formulário
-  //limpar dados do formulário
-
-  public vagas: Vaga[] = []; // vetor para armazenar as vagas
-
-  constructor(private _apiService: Api) {} // estabelece conexão com a API
+  constructor(private _apiService: Api) {} //estabelece conexão quando a págian é carregada
 
   ngOnInit(): void {
     this.listarVagas();
   }
 
-  //método para listar as vagas (controller)
+  // métodos READ ( Listar todas Vagas)
   listarVagas(): void {
-    this._apiService.getVagas().subscribe((retornaVagas) => {
-      this.vagas = retornaVagas.map((e) => {
-        return new Vaga(e.id, e.nome, e.foto, e.descricao, e.salario);
-      }); // armazena o conteúdo retornado da API no vetor vagas
-    });
+    //preencher o vetor comas informações da API
+    this._apiService.getVagas().subscribe(
+      // subscribe => Ferramenta do Observable para fazer conexão Assincrona
+      //mapeamento de Dados
+      (resposta) => {
+        //convertendo a Respostas da API em Obj para o Vetor
+        this.vagas = resposta.map((e) => new Vaga(e.id, e.nome, e.foto, e.descricao, e.salario));
+      },
+    );
   }
 
-  //cadastrar
+  //Listar Vaga Unica (get)
+  listarVagaUnica(vaga: Vaga) {
+    this.vaga = vaga;
+  }
+
+  //criar
   cadastrarVaga(): void {
+    if (
+      this.vaga.nome === '' ||
+      this.vaga.descricao === '' ||
+      this.vaga.foto === '' ||
+      this.vaga.salario === 0
+    ) {
+      alert('Preencha todos os campos para cadastrar a vaga');
+      return;
+    }
+    console.log(this.vaga);
     this._apiService.cadastrarVaga(this.vaga).subscribe(() => {
-      this.listarVagas();
-      this.vaga = new Vaga(0, '', '', '', 0); // limpa os dados do formulário
+      this.vaga = new Vaga(0, '', '', '', 0); //limpa o formulário
+      this.listarVagas(); //atualiza a lista de vagas
+      alert('Vaga Cadastrada com Sucesso');
     });
   }
 
   //atualizar
-  updateVaga(): void {
-    this._apiService.atualizarVaga(this.vaga.id,this.vaga).subscribe(() => {
-      this.listarVagas();
-      this.vaga = new Vaga(0, '', '', '', 0); // limpa os dados do formulário
+  atualizarVaga(id: any): void {
+    this._apiService.atualizarVaga(id, this.vaga).subscribe(() => {
+      this.vaga = new Vaga(0, '', '', '', 0);
+      this.listarVagas(); // atualiza a lista de vagas
+      alert('Vaga Atualizada com Sucesso');
     });
   }
 
   //deletar
-  deletarVaga(id: number): void {
+  excluirVaga(id: any): void {
     this._apiService.removerVaga(id).subscribe(() => {
-      this.listarVagas();
+      this.vaga = new Vaga(0, '', '', '', 0);
+      this.listarVagas(); // atualiza a lista de vagas
+      alert('Vaga Excluída com Sucesso');
     });
   }
 }
