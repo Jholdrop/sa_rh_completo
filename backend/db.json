@@ -36,5 +36,40 @@
       "salario": "2000"
     }
   ],
+  "curriculos": [
+    {
+      "id": "1",
+      "usuarioId": 1,
+      "titulo": "Desenvolvedor Front-end Junior",
+      "formacao": "Tecnico em Desenvolvimento de Sistemas - SENAI",
+      "experiencia": "Projetos academicos com Angular, HTML, CSS e consumo de APIs REST.",
+      "habilidades": "Angular, TypeScript, HTML, CSS, Git",
+      "linkedin": "https://www.linkedin.com/in/candidato-front",
+      "resumo": "Candidato focado em interfaces web, organizacao de componentes e integracao com APIs.",
+      "vagaId": "1"
+    },
+    {
+      "id": "2",
+      "usuarioId": 2,
+      "titulo": "Analista de Dados Junior",
+      "formacao": "Tecnologo em Analise e Desenvolvimento de Sistemas",
+      "experiencia": "Tratamento de planilhas, consultas SQL e dashboards em projetos de estudo.",
+      "habilidades": "SQL, Python, Power BI, Excel",
+      "linkedin": "https://www.linkedin.com/in/candidato-dados",
+      "resumo": "Perfil voltado para organizacao, analise e visualizacao de dados para tomada de decisao.",
+      "vagaId": "4"
+    },
+    {
+      "id": "3",
+      "usuarioId": 1,
+      "titulo": "Assistente de Suporte Tecnico",
+      "formacao": "Curso tecnico em Informatica",
+      "experiencia": "Atendimento a usuarios, manutencao basica e registro de chamados.",
+      "habilidades": "Atendimento, redes, hardware, comunicacao",
+      "linkedin": "https://www.linkedin.com/in/candidato-suporte",
+      "resumo": "Profissional em inicio de carreira com boa comunicacao e interesse em suporte tecnico.",
+      "vagaId": "2"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

@@ -1,0 +1,57 @@
+<section class="curriculo-detail-page">
+  @if (carregando) {
+    <p class="status">Carregando detalhes...</p>
+  } @else if (feedbackTexto) {
+    <p class="feedback erro">{{ feedbackTexto }}</p>
+  } @else if (curriculo) {
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">Usuario #{{ curriculo.usuarioId }}</p>
+        <h1>{{ curriculo.titulo }}</h1>
+      </div>
+
+      @if (curriculo.vagaId) {
+        <span class="badge">Vaga #{{ curriculo.vagaId }}</span>
+      }
+    </header>
+
+    <article class="detail-card">
+      <section>
+        <h2>Resumo</h2>
+        <p>{{ curriculo.resumo }}</p>
+      </section>
+
+      <section>
+        <h2>Formacao</h2>
+        <p>{{ curriculo.formacao }}</p>
+      </section>
+
+      <section>
+        <h2>Experiencia</h2>
+        <p>{{ curriculo.experiencia }}</p>
+      </section>
+
+      <section>
+        <h2>Habilidades</h2>
+        <p>{{ curriculo.habilidades }}</p>
+      </section>
+
+      @if (curriculo.linkedin) {
+        <section>
+          <h2>LinkedIn</h2>
+          <a [href]="formatarLinkedin(curriculo.linkedin)" target="_blank" rel="noopener">
+            {{ curriculo.linkedin }}
+          </a>
+        </section>
+      }
+    </article>
+
+    <div class="actions">
+      @if (curriculo.id !== undefined && curriculo.id !== null) {
+        <a [routerLink]="['/curriculos/editar', curriculo.id]" class="primary-action">Editar</a>
+      }
+      <button type="button" (click)="excluirCurriculo()">Excluir</button>
+      <a routerLink="/curriculos" class="secondary-action">Voltar</a>
+    </div>
+  }
+</section>

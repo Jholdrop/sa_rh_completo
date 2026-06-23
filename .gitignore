@@ -1,17 +1,49 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# Arquivos que NAO devem ir para o Git:
+# dependencias baixadas, builds gerados, cache, logs, configuracoes locais
+# e arquivos do sistema operacional.
+#
+# Arquivos importantes que devem continuar sendo enviados:
+# src/, public/, backend/db.json, angular.json, package.json e package-lock.json.
 
-# Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+# Dependencias do Node
+/node_modules/
 
-# Node
-/node_modules
-npm-debug.log
-yarn-error.log
+# Builds e arquivos compilados do Angular
+/dist/
+/tmp/
+/out-tsc/
+/bazel-out/
+/.angular/cache/
 
-# IDEs and editors
+# Cobertura de testes e resultados temporarios
+/coverage/
+/typings/
+__screenshots__/
+test-results/
+playwright-report/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+libpeerconnection.log
+testem.log
+
+# Variaveis de ambiente e configuracoes sensiveis
+.env
+.env.*
+!.env.example
+!.env.exemplo
+
+# Cache de estilos
+.sass-cache/
+
+# Arquivos de lock temporarios
+/connect.lock
+
+# Editores e IDEs
 .idea/
 .project
 .classpath
@@ -19,26 +51,17 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+.history/
 
-# Visual Studio Code
+# Visual Studio Code: guarda apenas configuracoes compartilhaveis
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/mcp.json
-.history/*
 
-# Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-__screenshots__/
-
-# System files
+# Arquivos do sistema operacional
 .DS_Store
 Thumbs.db
+desktop.ini

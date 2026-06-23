@@ -1,0 +1,77 @@
+<section class="curriculo-list-page">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">{{ subtituloPagina }}</p>
+      <h1>{{ tituloPagina }}</h1>
+    </div>
+
+    <div class="header-actions">
+      <a routerLink="/curriculos/novo" class="primary-action">Novo curriculo</a>
+      @if (!modoAdmin) {
+        <a routerLink="/curriculos" class="secondary-action">Visao ADM</a>
+      }
+    </div>
+  </header>
+
+  @if (feedbackTexto) {
+    <p class="feedback" [class.erro]="feedbackTipo === 'erro'">{{ feedbackTexto }}</p>
+  }
+
+  @if (carregando) {
+    <p class="status">Carregando curriculos...</p>
+  } @else if (curriculos.length === 0) {
+    <div class="empty-state">
+      <h2>Nenhum curriculo encontrado</h2>
+      <a routerLink="/curriculos/novo" class="primary-action">Cadastrar curriculo</a>
+    </div>
+  } @else {
+    <div class="curriculo-grid">
+      @for (curriculo of curriculos; track curriculo.id) {
+        <article class="curriculo-card">
+          <div class="card-header">
+            <div>
+              <p class="meta">Usuario #{{ curriculo.usuarioId }}</p>
+              <h2>{{ curriculo.titulo }}</h2>
+            </div>
+
+            @if (curriculo.vagaId) {
+              <a [routerLink]="['/curriculos/vaga', curriculo.vagaId]" class="badge">Vaga #{{ curriculo.vagaId }}</a>
+            } @else {
+              <span class="badge neutro">Sem vaga</span>
+            }
+          </div>
+
+          <p class="resumo">{{ curriculo.resumo }}</p>
+
+          <dl>
+            <div>
+              <dt>Formacao</dt>
+              <dd>{{ curriculo.formacao }}</dd>
+            </div>
+            <div>
+              <dt>Experiencia</dt>
+              <dd>{{ curriculo.experiencia }}</dd>
+            </div>
+            <div>
+              <dt>Habilidades</dt>
+              <dd>{{ curriculo.habilidades }}</dd>
+            </div>
+          </dl>
+
+          <div class="card-actions">
+            @if (curriculo.id !== undefined && curriculo.id !== null) {
+              <a [routerLink]="['/curriculos', curriculo.id]">Detalhes</a>
+              <a [routerLink]="['/curriculos/editar', curriculo.id]">Editar</a>
+            }
+
+            @if (curriculo.linkedin) {
+              <a [href]="formatarLinkedin(curriculo.linkedin)" target="_blank" rel="noopener">LinkedIn</a>
+            }
+
+            <button type="button" (click)="excluirCurriculo(curriculo)">Excluir</button>
+          </div>
+        </article>
+      }
+    </div>
+  }
+</section>
